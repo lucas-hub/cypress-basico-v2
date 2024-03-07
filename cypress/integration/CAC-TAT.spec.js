@@ -1,35 +1,45 @@
 /// <reference types="Cypress" />
 
 describe('Central de atendimento ao cliente TAT', ()=>{
-
+    const textao = Cypress._.repeat('Ola classe ', 50)
     beforeEach(()=> {
         cy.visit('./src/index.html')
     })
 
-    it('Verificar o titulo da aplicação', ()=> {
+    Cypress._.times(2, ()=> it('Verificar o titulo da aplicação', ()=> {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
-    })
+    }))
 
-    it('preenche os campos obrigatórios e envia o formulário', ()=> {
+    Cypress._.times(3, ()=> it('preenche os campos obrigatórios e envia o formulário', ()=> {
+        cy.clock()
         cy.get('#firstName').type('Lucas', {delay:0})
         cy.get('#lastName').type('Marco', {delay:0})
         cy.get('#email').type('Jooj@gmail.com', {delay:0})
         cy.get('#phone').type('1199999999', {delay:0})
-        cy.get('#open-text-area').type('"Lorem ipsum dolor sit amet, consectetur"', {delay:0})
+        cy.get('#open-text-area').type(textao, {delay:0})
         cy.get('button[type="submit"]').click()
 
         cy.get('.success').should('be.visible') 
-    })
+
+        cy.tick(3000) // em milissegundos
+
+        cy.get('.success').should('not.be.visible')
+    }))
 
     it('preenche os campos obrigatórios de forma errada e envia o formulário', ()=> {
+        cy.clock()
         cy.get('#firstName').type('Lucas', {delay:0})
         cy.get('#lastName').type('Marco', {delay:0})
         cy.get('#email').type('Jooj@.com', {delay:0})
         cy.get('#phone').type('2', {delay:0})
-        cy.get('#open-text-area').type('"Lorem ipsum dolor sit amet, consectetur"', {delay:0})
+        cy.get('#open-text-area').type(textao, {delay:0})
         cy.get('button[type="submit"]').click()
 
         cy.get('.error').should('be.visible') 
+
+        cy.tick(3000)
+
+        cy.get('.error').should('not.be.visible')
     })
 
     it('numero telefonico foi digitado usando valores não-numericos', ()=>{
@@ -55,8 +65,13 @@ describe('Central de atendimento ao cliente TAT', ()=>{
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', ()=> {
+        cy.clock()
         cy.get('button[type="submit"]').click()
         cy.get('.error').should('be.visible')
+
+        cy.tick(3000)
+
+        cy.get('.error').should('not.be.visible')
     })
 
     it('envia o formuário com sucesso usando um comando customizado', ()=> {
