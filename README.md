@@ -1,29 +1,27 @@
-# Testes automatizados com Cypress - Básico
+-- Documentação do projeto CAC-TAT testes automatizados -- 
 
-👋 Seja bem-vindo(a)!
+### O projeto CAC-TAT é um projeto de estudo, utilizando o framework Cypress e testando uma aplicação web com múltiplas funcionalidades
 
-É muito bom tê-lo(a) aqui. Tenho certeza que você vai adorar este curso. ❤️
+### Pré-requisitos para o projeto:
+- Cypress v9.5.1
+- Npm e NODE.js pelo menos na v10.0.0
+- Github e git
+- Um code.IDE de sua confiança
 
-## O que você vai aprender
+### Instalação das dependências:
+- Como instalar cada ferramenta utilizada no projeto
 
-Durante o curso de testes automatizados com Cypress (básico), você vai aprender:
+### Passos para rodar um teste:
+- Crie um arquivo .js dentro da pasta ./cypress/integration
+- Escreva os testes nesse arquivo
+- No arquivo "package.json" escreva alguns scripts para facilitar a inicialização do teste pelo CMD 
+- "scripts": {
+    "cy:open":"cypress open",
+    "cy:open:mobile":"cypress open --config viewportWidth=410 viewportHeight=860",
+    "test":"cypress run",
+    "test:mobile":"cypress run --config viewportWidth=410 viewportHeight=860"
+  },
+- No CMD, use algum desses comandos para rodar da forma que necessário, tanto em modo interativo no cypress ou modo headless, além da resolução padrão de PC ou Mobile.
 
-- Como configurar um projeto Cypress do zero
-- Como visitar páginas locais e remotas
-- Como lidar com os elementos mais comuns encontrados em aplicações web
-- Como testar _upload_ de arquivos
-- Como realizar as mais diversas verificações de resultados esperados
-- Como criar comandos customizados
-- Como lidar com links que abrem em outra aba do navegador
-- Como rodar testes simulando as dimensões de um dispositivo móvel
-- Como resolver os mesmos problemas de diferentes formas, conhecendo a [API do Cypress](https://docs.cypress.io/api/table-of-contents)
-- Como executar os testes em um _pipeline_ de integração contínua sempre que mudanças ocorrerem no código da aplicação (ou dos testes)
-- Como criar uma documentação mínima para seu projeto de testes automatizados
-
-## Vamos começar?
-
-Vá para a seção [estrutura do curso](./lessons/_course-structure_.md).
-
-___
-
-Este é mais um curso da [**Escola Talking About Testing**](https://udemy.com/user/walmyr).
+### Informações adicionais:
+- Quebre tudo o que for possível :) no mercy upon the developers
