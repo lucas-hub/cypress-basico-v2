@@ -143,4 +143,32 @@ describe('Central de atendimento ao cliente TAT', ()=>{
         cy.get('#privacy a').invoke('removeAttr', 'target').click() // o invoke removeu a propriedade 'target' para que o link seja aberto na mesma pagina
         cy.contains('Não salvamos dados submetidos no formulário da aplicação CAC TAT.')
     })
+
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', ()=> {
+        cy.get('.success').should('not.be.visible').invoke('show').should('be.visible')
+        .should('contain', 'Mensagem enviada com sucesso').invoke('hide').should('not.be.visible')
+
+        cy.get('.error').should('not.be.visible').invoke('show').should('be.visible')
+        .should('contain', 'Valide os campos obrigatórios!').invoke('hide').should('not.be.visible')
+    })
+
+    it('preenche a area de texto usando o comando invoke', ()=> {
+        cy.get('#open-text-area').invoke('val', textao).should('have.value', textao)
+    })
+
+    it('faz uma requisição HTTP', ()=> {
+        cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html').should((response)=>{
+        console.log(response)
+        const {status, statusText, body} = response
+        expect(status).to.equal(200)
+        expect(statusText).to.equal('OK')
+        expect(body).to.contain('CAC TAT')
+        })
+    })
+
+    it('achar o gato escondido', ()=> {
+        cy.get('#cat').invoke('show').should('be.visible')
+        cy.get('#title').invoke('text', 'CAT TAT')
+        cy.get('#subtitle').invoke('text', 'Curso daora, eu <3 gatos!')
+    })
 })
